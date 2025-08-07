@@ -1,4 +1,4 @@
-// src/components/Navbar.js
+
 import React, { useContext,useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
@@ -8,25 +8,16 @@ import axios from 'axios';
 const Navbar = () => {
   const { user, logout } = useContext(AuthContext);
   const navigate = useNavigate();
-  //serach bar search
+ 
   const [searchQuery, setSearchQuery] = useState('');
-// const [filteredSuggestions, setFilteredSuggestions] = useState([]);
+
 const [searchResults, setSearchResults] = useState({ users: [], posts: [] });
 
-// const dummySuggestions = ['name']; // replace with real users/posts
 
 const handleSearchChange = async (e) => {
   const input = e.target.value;
   setSearchQuery(input);
 
-  // if (input.trim() === '') {
-  //   setFilteredSuggestions([]);
-  // } else {
-  //   const filtered = dummySuggestions.filter((item) =>
-  //     item.toLowerCase().includes(input.toLowerCase())
-  //   );
-  //   setFilteredSuggestions(filtered);
-  // }
    if (input.trim() === '') {
     setSearchResults({ users: [], posts: [] });
     return;
@@ -66,17 +57,13 @@ const handleSuggestionClick = (text) => {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        {/* Collapsible content */}
-        {/* <div className="collapse navbar-collapse" id="navbarContent"> */}
+        
 
           <div className="collapse navbar-collapse" id="navbarContent">
-          {/* Search: Always visible */}
+       
           <div className="ms-md-3 my-2 my-md-0 w-100" style={{ maxWidth: '300px' }}>
             <div className="input-group">
-              {/* <span className="input-group-text bg-light border-end-0"> */}
-                {/* <i className="bi bi-search"></i> */}
-              {/* </span> */}
-              {/* <input className="form-control border-start-0" type="text" placeholder="Search" /> */}
+              
               <div className="position-relative w-100">
   <div className="input-group">
     <span className="input-group-text bg-light border-end-0">
@@ -91,21 +78,7 @@ const handleSuggestionClick = (text) => {
     />
   </div>
 
-  {/* Suggestions Dropdown */}
-  {/* {filteredSuggestions.length > 0 && (
-    <ul className="list-group position-absolute w-100 z-3" style={{ top: '100%', left: 0, }}>
-      {filteredSuggestions.map((suggestion, index) => (
-        <li
-          key={index}
-          className="list-group-item list-group-item-action"
-          onClick={() => handleSuggestionClick(suggestion)}
-          role="button"
-        >
-          {suggestion}
-        </li>
-      ))}
-    </ul>
-  )} */}
+ 
  {searchResults.users?.length > 0 || searchResults.posts?.length > 0 ? (
   <ul className="list-group position-absolute w-100 z-3" style={{ top: '100%', left: 0 }}>
     {searchResults.users?.map((user) => (

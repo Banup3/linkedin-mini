@@ -1,4 +1,4 @@
-// src/components/PostForm.js
+
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { AuthContext } from '../context/AuthContext';
@@ -12,13 +12,13 @@ const PostForm = ({ onPost }) => {
     if (!content.trim()) return;
 
     await axios.post(
-      'http://localhost:5000/api/posts',
+      '${process.env.REACT_APP_API_BASE_URL}/api/posts',
       { content },
       { headers: { Authorization: `Bearer ${token}` } }
     );
 
     setContent('');
-    onPost(); // refresh posts
+    onPost(); 
   };
 
   return (

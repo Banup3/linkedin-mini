@@ -12,7 +12,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-/* Prevent horizontal scroll */
+
 * {
   box-sizing: border-box;
 }
@@ -22,11 +22,4 @@ body {
   padding: 0;
   overflow-x: hidden;
 }
-/* img, input, textarea, button {
-  max-width: 100%;
-  width: 50%;
-} */
- /* .container-fluid {
-  max-width: 100%;
-  overflow-x: hidden;
-} */
+
