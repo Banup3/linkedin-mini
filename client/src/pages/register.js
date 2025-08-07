@@ -12,7 +12,7 @@ const Register = () => {
  const handleSubmit = async (e) => {
   e.preventDefault();
   const API_BASE = process.env.REACT_APP_API_BASE_URL;
-  await axios.post(`${API_BASE}/api/auth/register`, form);
+  await axios.post(`${API_BASE}api/auth/register`, form);
   navigate('/login');
 };
 
