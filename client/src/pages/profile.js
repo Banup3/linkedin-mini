@@ -13,10 +13,10 @@ const Profile = () => {
   const fetchData = async () => {
     const API_BASE = process.env.REACT_APP_API_BASE_URL;
 
-    const res1 = await axios.get(`${API_BASE}/api/auth/profile/${id}`);
+    const res1 = await axios.get(`${API_BASE}api/auth/profile/${id}`);
     setProfile(res1.data);
 
-    const res2 = await axios.get(`${API_BASE}/api/posts/user/${id}`);
+    const res2 = await axios.get(`${API_BASE}api/posts/user/${id}`);
     setPosts(res2.data);
   };
 

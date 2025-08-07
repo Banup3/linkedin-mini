@@ -11,7 +11,7 @@ const Home = () => {
   const fetchPosts = async () => {
     const API_BASE = process.env.REACT_APP_API_BASE_URL;
     try {
-      const res = await axios.get(`${API_BASE}/api/posts`, {
+      const res = await axios.get(`${API_BASE}api/posts`, {
         headers: {
           Authorization: `Bearer ${token}`, // Add this to protect route if needed
         },

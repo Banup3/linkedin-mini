@@ -24,7 +24,7 @@ const handleSearchChange = async (e) => {
   }
 
   try {
-    const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/search?q=${input}`);
+    const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}api/search?q=${input}`);
     setSearchResults(res.data);
   } catch (err) {
     console.error('Search error:', err);
