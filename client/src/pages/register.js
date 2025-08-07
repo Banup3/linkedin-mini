@@ -1,4 +1,4 @@
-// src/pages/Register.js
+
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -9,11 +9,13 @@ const Register = () => {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    await axios.post('http://localhost:5000/api/auth/register', form);
-    navigate('/login');
-  };
+ const handleSubmit = async (e) => {
+  e.preventDefault();
+  const API_BASE = process.env.REACT_APP_API_BASE_URL;
+  await axios.post(`${API_BASE}/api/auth/register`, form);
+  navigate('/login');
+};
+
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100 bg-light">

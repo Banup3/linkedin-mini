@@ -1,4 +1,4 @@
-// src/pages/Profile.js
+
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -10,16 +10,19 @@ const Profile = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res1 = await axios.get(`http://localhost:5000/api/auth/profile/${id}`);
-      setProfile(res1.data);
+  const fetchData = async () => {
+    const API_BASE = process.env.REACT_APP_API_BASE_URL;
 
-      const res2 = await axios.get(`http://localhost:5000/api/posts/user/${id}`);
-      setPosts(res2.data);
-    };
+    const res1 = await axios.get(`${API_BASE}/api/auth/profile/${id}`);
+    setProfile(res1.data);
 
-    fetchData();
-  }, [id]);
+    const res2 = await axios.get(`${API_BASE}/api/posts/user/${id}`);
+    setPosts(res2.data);
+  };
+
+  fetchData();
+}, [id]);
+
 
   return (
     <div className="container mt-4">

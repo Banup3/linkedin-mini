@@ -1,4 +1,4 @@
-// src/pages/Login.js
+
 import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -11,26 +11,22 @@ const Login = () => {
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const res = await axios.post('http://localhost:5000/api/auth/login', form);
-  //   login(res.data.user, res.data.token);
-  //   navigate('/');
-  // };
+ 
   const handleSubmit = async (e) => {
   e.preventDefault();
   try {
-    const res = await axios.post('http://localhost:5000/api/auth/login', form);
-    setError(''); 
+    const API_BASE = process.env.REACT_APP_API_BASE_URL;
+    const res = await axios.post(`${API_BASE}/api/auth/login`, form);
+    setError('');
     login(res.data.user, res.data.token);
     navigate('/');
   } catch (error) {
     const errorMsg = error.response?.data?.error || "Login failed. Please try again.";
-    // alert(errorMsg);
-    setError(errorMsg); // You can replace this with a nicer UI message
+    setError(errorMsg); 
     console.error("Login error:", errorMsg);
   }
 };
+
 const [error, setError] = useState('');
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100 bg-light">

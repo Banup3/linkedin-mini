@@ -1,4 +1,4 @@
-// src/pages/Home.js
+
 import React, { useEffect, useState, useContext } from 'react';
 import axios from 'axios';
 import PostCard from '../components/PostCard';
@@ -9,19 +9,17 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
   const { token } = useContext(AuthContext);
 
-  const fetchPosts = async () => {
-    const res = await axios.get('http://localhost:5000/api/posts');
-    setPosts(res.data);
-  };
+ const fetchPosts = async () => {
+  const API_BASE = process.env.REACT_APP_API_BASE_URL;
+  const res = await axios.get(`${API_BASE}/api/posts`);
+  setPosts(res.data);
+};
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
 
   return (
     <div className="container mt-4">
       <div className="row">
-        {/* Optional Sidebar */}
+        
         <div className="col-md-3 d-none d-md-block">
           <div className="bg-light p-3 rounded shadow-sm">
             <h6>Welcome!</h6>
@@ -29,13 +27,12 @@ const Home = () => {
           </div>
         </div>
 
-        {/* Main Feed */}
+        
         <div className="col-md-6">
           {token && <PostForm onPost={fetchPosts} />}
           {posts.map(post => <PostCard key={post._id} post={post} />)}
         </div>
 
-        {/* Optional Right Sidebar */}
         <div className="col-md-3 d-none d-md-block">
           <div className="bg-light p-3 rounded shadow-sm">
             <h6>Suggestions</h6>
