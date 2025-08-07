@@ -12,7 +12,7 @@ const PostForm = ({ onPost }) => {
     if (!content.trim()) return;
 
     await axios.post(
-      '${process.env.REACT_APP_API_BASE_URL}/api/posts',
+      `${process.env.REACT_APP_API_BASE_URL}/api/posts`,
       { content },
       { headers: { Authorization: `Bearer ${token}` } }
     );

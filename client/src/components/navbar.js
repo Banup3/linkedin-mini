@@ -40,14 +40,10 @@ const handleSuggestionClick = (text) => {
   return (
     <nav className="navbar navbar-expand-md navbar-light bg-white shadow-sm px-3 py-2">
       <div className="container-fluid">
-
-        {/* Left: Logo */}
         <Link className="navbar-brand d-flex align-items-center" to="/">
           <img src="assets/2496097.png" alt="logo" width="34" height="34" />
           <span className="ms-2 fw-bold">LinkedIn</span>
         </Link>
-
-        {/* Toggle button for collapse */}
         <button
           className="navbar-toggler"
           type="button"
@@ -56,9 +52,6 @@ const handleSuggestionClick = (text) => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
-
-        
-
           <div className="collapse navbar-collapse" id="navbarContent">
        
           <div className="ms-md-3 my-2 my-md-0 w-100" style={{ maxWidth: '300px' }}>
@@ -75,6 +68,12 @@ const handleSuggestionClick = (text) => {
       placeholder="Search"
       value={searchQuery}
       onChange={handleSearchChange}
+      onBlur={() => {
+    setTimeout(() => {
+      setSearchResults({ users: [], posts: [] });
+    }, 150); 
+  }}
+  onFocus={handleSearchChange}
     />
   </div>
 
@@ -82,19 +81,21 @@ const handleSuggestionClick = (text) => {
  {searchResults.users?.length > 0 || searchResults.posts?.length > 0 ? (
   <ul className="list-group position-absolute w-100 z-3" style={{ top: '100%', left: 0 }}>
     {searchResults.users?.map((user) => (
-      <li key={user._id} className="list-group-item list-group-item-action">
-        <Link to={`/profile/${user._id}`}>
-          {user.name} <small>({user.email})</small>
-        </Link>
-      </li>
-    ))}
+  <li key={user._id} className="list-group-item list-group-item-action" onClick={() => handleSuggestionClick(user.name)}>
+    <Link to={`/profile/${user._id}`}>
+      {user.name} <small>({user.email})</small>
+    </Link>
+  </li>
+))}
+
     {searchResults.posts?.map((post) => (
-      <li key={post._id} className="list-group-item list-group-item-action">
-        <Link to={`/post/${post._id}`}>
-          Post by <strong>{post.author?.name || 'Unknown'}</strong>: {post.content.slice(0, 30)}...
-        </Link>
-      </li>
-    ))}
+  <li key={post._id} className="list-group-item list-group-item-action" onClick={() => handleSuggestionClick(post.content)}>
+    <Link to={`/post/${post._id}`}>
+      Post by <strong>{post.author?.name || 'Unknown'}</strong>: {post.content.slice(0, 30)}...
+    </Link>
+  </li>
+))}
+
   </ul>
 ) : null}
 
@@ -103,8 +104,6 @@ const handleSuggestionClick = (text) => {
 
             </div>
           </div>
-
-          {/* Center: Navigation Icons */}
           <div className="d-flex flex-wrap justify-content-center gap-3 mx-auto mt-2 mt-md-0">
             <NavItem icon="bi-house-fill" label="Home" to="/" />
             <NavItem icon="bi-people-fill" label="My Network" to="/network" />
@@ -112,8 +111,6 @@ const handleSuggestionClick = (text) => {
             <NavItem icon="bi-chat-dots-fill" label="Messaging" to="/messaging" />
             <NavItem icon="bi-bell-fill position-relative" label="Notifications" to="/notifications" />
           </div>
-
-          {/* Right: Profile & Buttons */}
           <div className="d-flex flex-column flex-md-row align-items-md-center gap-2 ms-md-auto mt-3 mt-md-0">
             {user ? (
               <>
@@ -147,7 +144,6 @@ const handleSuggestionClick = (text) => {
           </div>
         </div>
       </div>
-      {/* </div> */}
     </nav>
   );
 };
